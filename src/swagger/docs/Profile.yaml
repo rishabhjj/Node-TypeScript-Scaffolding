@@ -1,0 +1,71 @@
+paths:
+  /profile:         # path of the create contact from your endpoint
+    get:              # endpoint request type (put request)
+      tags:
+        - Profile
+      summary: Used for Fetching Profile Data
+      produces:
+      - application/json
+      responses:
+        200:
+          description: Fetching Profile Data
+          examples:
+            {
+              "status":{
+                  "code":200,
+                  "message":"OK"
+              },
+              "result":{
+                  "name":"Rishabh Jain",
+                  "age":27,
+                  "employeeId":1820,
+                  "hobbies":[
+                    "Cricket",
+                    "Blog Writing"
+                  ]
+              }
+            }
+    post:              # endpoint request type (put request)
+      tags:
+        - Profile
+      summary: Used for Creation of Profile Data
+      produces:
+      - application/json
+      consumes:
+      - application/json
+      parameters:     # request parameters
+      - in: body
+        name: Profile Data
+        description: Profile Data to be Dumped
+        required: true
+        schema:
+          $ref: '#/definitions/Create-Profile'
+      responses:
+        200:
+          description: Profile Added Successfully
+          examples:
+            {
+                "status": {
+                    "code": 200,
+                    "message": "Profile Added Successfully"
+                },
+                "result": null
+            }
+
+definitions:        # Schema definition for the request body
+  Create-Profile:
+    type: object
+    properties:
+      name:
+        type: string
+        required: true
+      age:
+        type: number
+        required: true
+      employeeId:
+        type: number
+        required: true
+      hobbies:
+        type: array
+        items:
+          type: string

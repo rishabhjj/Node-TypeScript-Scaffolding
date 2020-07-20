@@ -1,0 +1,73 @@
+{
+  "name": "microservices_boilerplate",
+  "version": "1.0.0",
+  "description": "Microservices Boiler Plate With Best Industry Standards",
+  "main": "server.js",
+  "scripts": {
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "build": "tsc",
+    "local": "ts-node ./src/server.ts",
+    "prestart": "npm run build",
+    "dev": "npm run build && NODE_ENV=development node build/server.js",
+    "test": "mocha -r ts-node/register src/test/**",
+    "coverage": " npm run build && ./node_modules/.bin/istanbul cover --report html -x 'build/test/*.js' ./node_modules/.bin/_mocha --- -R dot --recursive build/*/ && istanbul check-coverage",
+    "precommit": "npm run lint",
+    "prepush": "npm run lint",
+    "doc": "./node_modules/.bin/typedoc --out docs src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "1.19.0",
+    "chai": "^4.2.0",
+    "dotenv": "8.2.0",
+    "express": "4.17.1",
+    "find-config": "1.0.0",
+    "http-errors": "^1.7.3",
+    "http-status-codes": "^1.4.0",
+    "istanbul": "^0.4.5",
+    "joi": "^14.3.1",
+    "mocha": "^7.1.1",
+    "sinon": "^9.0.1",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "ts-node": "8.8.1",
+    "typescript": "3.8.3",
+    "uuid": "7.0.2",
+    "winston": "^3.2.1",
+    "winston-daily-rotate-file": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/chai": "^4.2.11",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.3",
+    "@types/http-errors": "^1.6.3",
+    "@types/http-status-codes": "^1.2.0",
+    "@types/istanbul": "^0.4.30",
+    "@types/joi": "^14.3.4",
+    "@types/mocha": "^7.0.2",
+    "@types/sinon": "^7.5.2",
+    "@types/swagger-jsdoc": "^3.0.2",
+    "@types/swagger-ui-express": "^4.1.2",
+    "@types/uuid": "^7.0.2",
+    "@types/winston": "^2.4.4",
+    "husky": "4.2.3",
+    "lint-staged": "^10.1.0",
+    "tslint": "5.18.0",
+    "tslint-config-airbnb": "5.11.1",
+    "typedoc": "^0.17.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "tslint --fix",
+      "git add"
+    ]
+  }
+}
